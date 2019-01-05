@@ -37,10 +37,7 @@ export default class Bookcase extends Component {
 
   _renderItem = ({item}) => (
     <BookcaseItem
-      id={item.id}
-      title={item.title}
-      author={item.author}
-      thumbnail={item.thumbnail}
+      bookObj={item}
       navigation={this.props.navigation}
     />
   );

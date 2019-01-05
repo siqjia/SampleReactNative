@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
-import { createRootNavigator } from './router';
+import { createRootNavigator,AppContainer } from './router';
 
-export default createRootNavigator();
+// export default createRootNavigator();
 
 // const instructions = Platform.select({
 //   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -11,18 +11,14 @@ export default createRootNavigator();
 //     'Shake or press menu button for dev menu',
 // });
 
-// type Props = {};
-// export default class App extends Component<Props> {
-//   render() {
-//     return (
-//       <View style={styles.container}>
-//         <Text style={styles.welcome}>Welcome to React Native!</Text>
-//         <Text style={styles.instructions}>To get started, edit App.js</Text>
-//         <Text style={styles.instructions}>{instructions}</Text>
-//       </View>
-//     );
-//   }
-// }
+type Props = {};
+export default class App extends Component<Props> {
+  render() {
+    return (
+      <AppContainer/>
+    );
+  }
+}
 
 // const styles = StyleSheet.create({
 //   container: {

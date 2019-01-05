@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
+  TextInput,
   View,
   Button
 } from 'react-native';
@@ -9,12 +10,17 @@ import {
 export default class EditBook extends Component {
   render() {
     const {navigation} = this.props;
-    const itemId = navigation.getParams('id', 'No-ID');
+    const bookObj = navigation.getParam('bookObj', {});
+    const itemId = bookObj.id;
+    const title = bookObj.title;
 
     return (
       <View style={styles.container}>
         <Text style={styles.title}>
           EditBook #{JSON.stringify(itemId)}
+        </Text>
+        <Text style={styles.title}>
+          {title}
         </Text>
         <Button
           title="Back to books"
