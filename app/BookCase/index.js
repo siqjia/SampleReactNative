@@ -7,32 +7,13 @@ import {
   FlatList
 } from 'react-native';
 import BookcaseItem from './BookcaseItem';
+import {loadBooks} from './actions';
+import {connect} from 'react-redux';
 
-export default class Bookcase extends Component {
+class Bookcase extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      books: [
-        {
-          id: 1,
-          title: 'Harry Potter and the Goblet of Fire',
-          author: 'J. K. Rowling',
-          thumbnail: 'https://covers.openlibrary.org/w/id/7984916-M.jpg'
-        },
-        {
-          id: 2,
-          title: 'The Hobbit',
-          author: 'J. R. R. Tolkien',
-          thumbnail: 'https://covers.openlibrary.org/w/id/6979861-M.jpg'
-        },
-        {
-          id: 3,
-          title: '1984',
-          author: 'George Orwell',
-          thumbnail: 'https://covers.openlibrary.org/w/id/7222246-M.jpg'
-        }
-      ]
-    }
+    this.props.showBooksList();
   }
 
   _renderItem = ({item}) => (
@@ -51,7 +32,7 @@ export default class Bookcase extends Component {
           barStyle="light-content"
         />
         <FlatList
-          data={this.state.books}
+          data={this.props.books} //state would be state of this component, props would be taking from the store
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
         />
@@ -66,3 +47,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   }
 });
+
+//link component to data in the store
+const mapStateToProps = (state) => ({
+  books:state.BookCaseList.books //triggers BookcaseList in BaseReducer
+});
+
+//map any changes to the state when action is triggered
+const mapDispatchToProps = (dispatch) => ({
+  showBooksList: () => {
+    dispatch(loadBooks()); //dispatch the action loadBooks
+  }
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(Bookcase)
+
