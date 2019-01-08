@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dimensions, Platform,Text } from 'react-native';
+import { Dimensions, Text } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
@@ -58,7 +58,7 @@ const Tabs = createBottomTabNavigator({
 Tabs.navigationOptions = ({navigation}) => {
       const title = navigation.state.routes[navigation.state.index].routeName;
       const headerStyle = styleTitle(title);
-      return {headerStyle,title};
+      return {headerStyle, title};
   }
 
 styleTitle = (title) => {

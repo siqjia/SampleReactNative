@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   StatusBar,
   FlatList
 } from 'react-native';
 import BookcaseItem from './BookcaseItem';
-import {loadBooks} from './actions';
-import {connect} from 'react-redux';
+import { loadBooks, deleteBook } from './actions';
+import { connect } from 'react-redux';
 
 class Bookcase extends Component {
   constructor(props) {
@@ -16,10 +15,15 @@ class Bookcase extends Component {
     this.props.showBooksList();
   }
 
+  _onDeleteBook = (deletedBook) => {
+    this.props.deletingBook(deletedBook);
+  }
+
   _renderItem = ({item}) => (
     <BookcaseItem
       bookObj={item}
       navigation={this.props.navigation}
+      _onDeleteBook={this._onDeleteBook} //pass _onDeleteBook function to BookcaseItem component
     />
   );
 
@@ -50,15 +54,18 @@ const styles = StyleSheet.create({
 
 //link component to data in the store
 const mapStateToProps = (state) => ({
-  books:state.BookCaseList.books //triggers BookcaseList in BaseReducer
+  books: state.BookCaseList.books //triggers BookcaseList in BaseReducer
 });
 
 //map any changes to the state when action is triggered
 const mapDispatchToProps = (dispatch) => ({
   showBooksList: () => {
     dispatch(loadBooks()); //dispatch the action loadBooks
+  },
+  deletingBook: (deletedBook) => {
+    dispatch(deleteBook(deletedBook)); //dispatch the action loadBooks
   }
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(Bookcase)
+export default connect(mapStateToProps, mapDispatchToProps)(Bookcase)
 

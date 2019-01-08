@@ -5,8 +5,8 @@ import {
   View,
   Button
 } from 'react-native';
-import {editBook} from './actions';
-import {connect} from 'react-redux';
+import { editBook } from './actions';
+import { connect } from 'react-redux';
 
 class EditBook extends Component {
 
@@ -16,22 +16,22 @@ class EditBook extends Component {
     this._navigateToTabs = this._navigateToTabs.bind(this);
   }
 
-  _editBook(){
+  _editBook() {
     this.props.editBook({
       id: 1,
       title: 'The Goblet of Fire',
       author: 'J. K. Rowling',
       thumbnail: 'https://covers.openlibrary.org/w/id/7984916-M.jpg'
     });
-    this.props.navigation.navigate('Tabs');
+    this.props.navigation.navigate('Tabs'); //Edit Book and Tabs are on the same level
   }
 
-  _navigateToTabs(){
+  _navigateToTabs() {
     this.props.navigation.navigate('Tabs');
   }
 
   render() {
-    const {navigation} = this.props;
+    const { navigation } = this.props;
     const bookObj = navigation.getParam('bookObj', {});
     const itemId = bookObj.id;
     const title = bookObj.title;
@@ -39,7 +39,7 @@ class EditBook extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>
-          EditBook #{JSON.stringify(itemId)}
+          Edit Book #{JSON.stringify(itemId)}
         </Text>
         <Text style={styles.title}>
           {title}
@@ -81,4 +81,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(EditBook)
+export default connect(mapStateToProps, mapDispatchToProps)(EditBook)
